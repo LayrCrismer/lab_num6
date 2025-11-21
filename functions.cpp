@@ -102,3 +102,59 @@ void mixTiles(int board[SIZE][SIZE]) { //перемешивание плиток
         }
     }
 }
+
+bool isComplete(const int board[SIZE][SIZE]) { //проверка завершения игры, расположены ли все плитки в правильном порядке
+    int count = 1;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (i==SIZE-1 && j==SIZE-1) {
+                return board[i][j]==0; //последняя ячейка должна быть пустой
+            }
+            if (board[i][j] != count++) {
+                return false; //найдена неверно расположенная плитка
+            }
+        }
+    }
+    return true; //все плитки успешно попали на свои места
+}
+
+int getInversions(const int board[SIZE][SIZE]) { //подсчет количества инверсий в расстановке, т.е подсчёт пар плиток, где большая цифра предшествует меньшей
+    int flat[SIZE * SIZE];//двумерный массив в одномерный
+    int k = 0;
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
+            flat[k++] = board[i][j];
+        }
+    }
+
+    int inversions = 0;
+    for (int i = 0; i < SIZE * SIZE - 1; ++i) { //подсчёт инверсий без пустой ячейки
+        for (int j = i + 1; j < SIZE * SIZE; ++j) {
+            if (flat[i] != 0 && flat[j] != 0 && flat[i] > flat[j]) {
+                inversions++;
+            }
+        }
+    }
+    return inversions;
+}
+
+bool mayCompleted(const int board[SIZE][SIZE]) { //проверка возможности решения головоломки из текущего состояния
+    //использует математическое условие разрешимости "пятнашек" (нашёл в инете)
+    int inversions = getInversions(board);
+    int empty_row, empty_col;
+    find_emptyslot(board, empty_row, empty_col);
+    //вычисление строки пустой ячейки снизу от 1 до SIZE
+    int emptyrow_bottom = SIZE - empty_row;
+
+    if (SIZE % 2 != 0) {
+        return inversions %2 == 0;
+    }
+    else {
+        if (emptyrow_bottom % 2 != 0) {//для нечетного размера четное количество инверсий
+            return inversions %2 ==0;
+        }
+        else { //для четного размера зависит от строки пустой ячейки и четности инверсий
+            return inversions %2 != 0;
+        }
+    }
+}
