@@ -15,3 +15,19 @@ void board_generation(int board[SIZE][SIZE]) { //генерация игрово
     }
     board[SIZE-1][SIZE-1] = 0; //правый нижний угол - пустой
 }
+
+void draw_board(const int board[SIZE][SIZE]) { //отрисовка игрового поля
+    for (int i = 0; i < SIZE; i++) {
+        cout<<"|";
+        for (int j = 0; j < SIZE; j++) {
+            if (board[i][j] == 0) {
+                cout<<setw(4)<<" "; //пустая ячейка - пробел
+            }
+            else {
+                cout<<setw(4)<<board[i][j];
+            }
+            cout<<"|"; //разделители
+        }
+        cout<<endl;
+    }
+}
