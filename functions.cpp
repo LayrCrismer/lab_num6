@@ -3,7 +3,7 @@
 //
 #include <iostream>
 #include <iomanip>
-#include "head.h"
+#include "heads.h"
 using namespace std;
 
 void board_generation(int board[SIZE][SIZE]) { //генерация игрового поля, где каждая клетка - упорядоченное число от 1 до SIZE*SIZE-1
