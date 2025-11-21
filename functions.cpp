@@ -80,3 +80,25 @@ bool moveTile(int board[SIZE][SIZE],char move) { //перемещение пли
     }
     return false;//недопустимый ход
 }
+
+void mixTiles(int board[SIZE][SIZE]) { //перемешивание плиток для начала игры
+    int flat[SIZE * SIZE];
+    int k = 0;
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
+            flat[k++] = board[i][j];
+        }
+    }
+    //алгоритм для случайного перемешивания
+    for (int i = SIZE * SIZE - 1; i > 0; --i) {
+        int j = rand() % (i + 1);
+        swapSlots(flat[i], flat[j]);
+    }
+
+    k = 0;
+    for (int i = 0; i < SIZE; ++i) { //обратно в двумерный массив
+        for (int j = 0; j < SIZE; ++j) {
+            board[i][j] = flat[k++];
+        }
+    }
+}
