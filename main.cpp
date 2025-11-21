@@ -17,6 +17,18 @@ void mixTiles(int board[SIZE][SIZE]);
 int main() {
     int board[SIZE][SIZE];
 
+    cout<<"Логическая игра 15!"<<endl;
+    cout<<"---------------------------"<<endl;
+    cout<<"Управление:"<<endl;
+    cout<<"a - сдвинуть плитку влево в пустой слот"<<endl;
+    cout<<"d - сдвинуть плитку вправо в пустой слот"<<endl;
+    cout<<"w - сдвинуть плитку вверх в пустой слот"<<endl;
+    cout<<"s - сдвинуть плитку вниз в пустой слот"<<endl;
+    cout<<endl;
+    cout<<"q - выйти из игры"<<endl;
+    cout<<endl;
+    cout<<"Удачи!"<<endl;
+    cout<<"---------------------------"<<endl;
 
     srand(time(NULL));
     do {
